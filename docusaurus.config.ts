@@ -2,7 +2,7 @@ import type {Config} from '@docusaurus/types';
 
 const config: Config = {
   title: 'Crow Language',
-  tagline: 'Functional language with algebraic effects',
+  tagline: 'Functional language with strong type system',
   url: 'https://crow-rs.github.io',
   baseUrl: '/docs/',
   organizationName: 'crow-rs',
