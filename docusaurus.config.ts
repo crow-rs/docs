@@ -19,7 +19,7 @@ const config: Config = {
           routeBasePath: '/',
           sidebarPath: './sidebars.ts',
         },
-        blog: false,
+        blog: true,
         theme: {
           customCss: './src/css/custom.css',
         },
