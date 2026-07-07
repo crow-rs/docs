@@ -1,0 +1,89 @@
+---
+slug: welcome
+title: Welcome to Crow 🐦‍⬛
+authors: [Ivan, Vyacheslav]
+tags: [devlog, hello]
+---
+
+We're building a programming language called Crow, and this blog is where we'll document the journey — design decisions, compiler internals, and the inevitable "why did we do it this way" moments.
+
+<!-- truncate -->
+
+## What is Crow?
+
+Crow is a compiled, functional-first language with algebraic effects and strong type inference. It compiles to native code through LLVM.
+
+Here's what it looks like:
+
+```rust
+
+fun fibonacci(n: i32) -> i32 {
+    match n {
+        0 -> 0,
+        1 -> 1,
+        val n -> fibonacci(n - 1) + fibonacci(n - 2)
+    }
+}
+
+fun main() -> i8 {
+    print(fibonacci(10))
+    0
+}
+
+```
+
+No semicolons. No explicit type annotations where the compiler can figure them out. Pattern matching as a first-class construct.
+
+## Why another language?
+
+Fair question. The short answer: we wanted a language that combines things we like from different worlds, without the baggage.
+
+**From Rust** — zero-cost abstractions, strong types, native compilation. But without the borrow checker complexity. Crow uses reference counting instead of ownership.
+
+**From Koka** — algebraic effects as the way to handle side effects. Your function signature tells you exactly what it does: reads a file, mutates state, talks to the network. All tracked by the type system.
+
+**From ML/OCaml** — Hindley-Milner type inference, pattern matching, expression-oriented design. Write clean code, let the compiler handle the types.
+
+The result is a language where you can write high-level functional code that compiles down to efficient native binaries, with side effects tracked and controlled — not hidden.
+
+## What's working today
+
+Crow is a real compiler, not a toy. The current pipeline:
+
+- **Parser** → **HIR** → **Type Checker** → **MIR** → **LLVM IR** → **Native binary**
+
+What's already implemented:
+- Full type inference with generics and monomorphization
+- Exhaustive pattern matching (compiled to decision trees in MIR)
+- Records and enums (algebraic data types)
+- Native FFI — call C functions directly
+- MIR optimization passes (constant propagation, dead code elimination, CFG simplification)
+- Linter framework with pluggable rules
+
+What's coming next:
+- Algebraic effects and handlers
+- Module system
+- Standard library
+- Reference counting runtime
+
+## Who is this for?
+
+If you're interested in any of the following, you'll find something here:
+
+- **Language design** — how do you design syntax and semantics that feel right?
+- **Compiler engineering** — HIR, MIR, type inference, codegen with LLVM/inkwell
+- **Type systems** — Hindley-Milner, row polymorphism, effect tracking
+- **Systems programming** — how a high-level language maps to machine code
+
+We'll write about all of it. Not abstract theory — concrete decisions with real code.
+
+## Follow along
+
+The compiler is open source:
+
+- [**GitHub**](https://github.com/crow-rs/crow) — the compiler itself
+- [**Docs**](/docs/intro) — language documentation
+
+This blog will be the devlog. Subscribe if your RSS reader still works, or just check back. We'll be here.
+
+Let's build something.
